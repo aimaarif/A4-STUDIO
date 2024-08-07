@@ -1,0 +1,187 @@
+{%extends 'base.html'%}
+
+{%block content%}
+
+<section id="center" class="center_list clearfix"> 
+  <div class="container">
+   <div class="row">
+    <div class="center_list_1 text-center clearfix">
+	 <div class="col-sm-12">
+	   <h5 class="mgt"><a href="#">Home</a> / List Detail</h5>
+	 </div>
+	</div>
+   </div>
+  </div>
+</section>
+
+{%include 'base_product.html'%}
+
+	 <div class="col-sm-9">
+	 <div class="detail_1l clearfix">
+      <div class="col-sm-5 space_left">
+				  <img title="" src="{{product.image.url}}" alt="abc" class="iw" style="height:500px; width: 800px;">
+	   </div>
+	   </div>
+	  </div>
+	  <div class="col-sm-7 space_left">
+	   <div class="detail_1lr clearfix">
+	    <div class="detail_1lri clearfix">
+			<br>
+		 <h4 class="mgt">{{product.name}}</h4>
+
+		 <h6>
+		 <span class="span_1">
+		  <i class="fa fa-star-o"></i>
+		  <i class="fa fa-star-o"></i>
+		  <i class="fa fa-star-o"></i>
+		  <i class="fa fa-star-o"></i>
+		  <i class="fa fa-star-o"></i>
+		 </span>
+		  <span class="span_2 col_2">0 Review(s)</span>
+		 </h6>
+		 <ul>
+		  <li>Lightning-fast turnaround times, including one-day production</li>
+		  <li>Multiple premium paper stocks and folding options</li>
+		  <li>Brochure direct mailing services available</li>
+		 </ul>
+		 <hr>
+		 <h3><span class="span_1 col_1">$11.64</span> <span class="span_2">$14.30</span> <span class="span_3 pull-right">In stock SKU: ND7</span></h3>
+		</div>
+		<div class="detail_1lri1 clearfix">
+		 <h5>Select Size:</h5>
+		 <select class="form-control" id="subject" name="subject">
+		<option>No additional charge</option>
+		<option>S No additional charge</option>
+		<option>M +$1.10</option>
+		<option>L +$2.20</option>
+		</select>
+		</div>
+		<div class="detail_1lri2 clearfix">
+		 <h5>Select Color:</h5>
+		 <ul>
+		  <li class="bg_1"></li>
+		  <li class="bg_2"></li>
+		  <li class="bg_3"></li>
+
+		 </ul>
+		</div>
+		<div class="detail_1lri3 clearfix">
+		 <div class="col-sm-6 space_left">
+		  <div class="detail_1lri3l clearfix">
+		   <h5 class="mgt">Quantity:</h5>
+		   <div class="input-group number-spinner">
+				<span class="input-group-btn">
+					<button class="btn btn-default" data-dir="dwn"><span class="glyphicon glyphicon-minus"></span></button>
+				</span>
+				<input type="text" class="form-control text-center" value="1">
+				<span class="input-group-btn">
+					<button class="btn btn-default" data-dir="up"><span class="glyphicon glyphicon-plus"></span></button>
+				</span>			</div>
+		  </div>
+		 </div>
+		 <div class="col-sm-6 space_right">
+		  <div class="detail_1lri3r clearfix">
+		   <h5 class="mgt text-right"><a class="button mgt" href="#">ADD TO CART</a></h5>
+		  </div>
+		 </div>
+		</div>
+		<div class="detail_1lri4 clearfix">
+        <h5>Array</h5>
+		<hr>
+		<ul>
+		 <li><a href="#"><i class="fa fa-repeat"></i> Add to Compare</a></li>
+		 <li><a href="#"><i class="fa fa-heart-o"></i> Add to Wishlist</a></li>
+		 <li><a href="#"><i class="fa fa-share-alt"></i> Share</a></li>
+		</ul>
+		</div>
+	   </div>
+	  </div>
+	 </div>
+
+	</div>
+	</div><br>
+	<div class="list_1 text-center clearfix">
+    <div class="col-sm-12">  
+	 <h2 class="mgt">You Might Also Like</h2>
+	</div>
+   </div>
+	<div class="list_pg_1r1 clearfix">
+		   <div class="col-sm-3">
+				   <div class="list_2im clearfix">
+				    <div class="list_2imi clearfix">
+				   <img src="../../static/img/15.jpg" class="iw" alt="abc">
+				  </div> 
+				    <div class="list_2imi1 clearfix">
+				   <h5 class="mgt normal">New</h5>
+				  </div>
+				    <div class="list_2imi2 clearfix">
+					   <span><a href="#"><i class="fa fa-eye"></i></a></span>
+					  </div>
+				 </div>
+				   <div class="list_2im1 clearfix">
+				    <h4><a href="#">Semper Porta</a></h4>
+					<h5><a class="col_1 bold" href="{% url 'detail' %}"><span>£60.00</span> £50.00</a></h5>
+					<h6><a class="button mgt" href="#">Add To Cart</a></h6>
+				   </div>
+				 </div>
+		   <div class="col-sm-3">
+				   <div class="list_2im clearfix">
+				    <div class="list_2imi clearfix">
+				   <img src="../../static/img/16.jpg" class="iw" alt="abc">
+				  </div> 
+				    <div class="list_2imi1 clearfix">
+				   <h5 class="mgt normal">New</h5>
+				  </div>
+				    <div class="list_2imi2 clearfix">
+					   <span><a href="#"><i class="fa fa-eye"></i></a></span>
+					  </div>
+				 </div>
+				   <div class="list_2im1 clearfix">
+				    <h4><a href="#">Per Conubia</a></h4>
+					<h5><a class="col_1 bold" href="{% url 'detail' %}"><span>£60.00</span> £50.00</a></h5>
+					<h6><a class="button mgt" href="#">Add To Cart</a></h6>
+				   </div>
+				 </div>
+		   <div class="col-sm-3">
+				   <div class="list_2im clearfix">
+				    <div class="list_2imi clearfix">
+				   <img src="../../static/img/17.jpg" class="iw" alt="abc">
+				  </div> 
+				    <div class="list_2imi1 clearfix">
+				   <h5 class="mgt normal">New</h5>
+				  </div>
+				    <div class="list_2imi2 clearfix">
+					   <span><a href="#"><i class="fa fa-eye"></i></a></span>
+					  </div>
+				 </div>
+				   <div class="list_2im1 clearfix">
+				    <h4><a href="#">Dapibus Diam</a></h4>
+					<h5><a class="col_1 bold" href="{% url 'detail' %}"><span>£60.00</span> £50.00</a></h5>
+					<h6><a class="button mgt" href="#">Add To Cart</a></h6>
+				   </div>
+				 </div>
+		   <div class="col-sm-3">
+				   <div class="list_2im clearfix">
+				    <div class="list_2imi clearfix">
+				   <img src="../../static/img/18.jpg" class="iw" alt="abc">
+				  </div> 
+				    <div class="list_2imi1 clearfix">
+				   <h5 class="mgt normal">New</h5>
+				  </div>
+				    <div class="list_2imi2 clearfix">
+					   <span><a href="#"><i class="fa fa-eye"></i></a></span>
+					  </div>
+				 </div>
+				   <div class="list_2im1 clearfix">
+				    <h4><a href="#">Eget Nulla</a></h4>
+					<h5><a class="col_1 bold" href="{% url 'detail' %}"><span>£60.00</span> £50.00</a></h5>
+					<h6><a class="button mgt" href="#">Add To Cart</a></h6>
+				   </div>
+				 </div>
+		 </div>
+   </div>
+  </div>
+</section>
+
+
+{%endblock%}

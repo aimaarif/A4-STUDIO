@@ -1,0 +1,84 @@
+{%extends 'base.html'%}
+
+{%block content%}
+
+<section id="center" class="center_list clearfix"> 
+  <div class="container">
+   <div class="row">
+    <div class="center_list_1 text-center clearfix">
+	 <div class="col-sm-12">
+	   <h5 class="mgt"><a href="product.html">Home</a> / Products </h5>
+	 </div>
+	</div>
+   </div>
+  </div>
+</section>
+
+{%include 'base_product.html' %}
+
+	 <div class="col-sm-9">
+	   <div class="list_pg_1r clearfix">
+	     <div class="product_1r clearfix">
+	    <div class="center_product_1r2 clearfix">
+	   <div class="col-sm-6">
+	    <div class="center_product_1r2l clearfix">
+		  <p class="mgt">There are 20 products.</p>
+		</div>
+	   </div>
+	   <div class="col-sm-6">
+	    <div class="center_product_1r2r text-right clearfix">
+		 <h5 class="mgt">SORT BY</h5>
+		 <select class="form-control" id="subject" name="subject">
+		<option>Price, Low To High</option>
+		<option>Price, High To Low</option>
+		<option>Alphabetically, A-Z</option>
+		<option>Alphabetically, Z-A</option>
+		<option>Date, New To Old</option>
+		</select>
+		</div>
+	   </div>
+	  </div>
+	  </div>
+		   <br>
+      <div class="list_pg_1r1 clearfix">
+    {% for product in products %}
+        <div class="col-sm-4 space_left">
+            <div class="list_2im clearfix">
+                <div class="list_2imi clearfix">
+                    <img src="{{ product.image.url }}" class="iw" alt="abc">
+                </div>
+                <div class="list_2imi1 clearfix">
+                    <h5 class="mgt normal">New</h5>
+                </div>
+                <div class="list_2imi2 clearfix">
+                    <span><a href="{% url 'detail' product.id %}"><i class="fa fa-eye"></i></a></span>
+                </div>
+            </div>
+            <div class="list_2im1 clearfix">
+                <h4><a href="{% url 'detail' product.id %}">{{ product.name }}</a></h4>
+                <h6><a class="button mgt" href="{% url 'detail' product.id %}">View</a></h6>
+            </div>
+        </div>
+    {% endfor %}
+</div>
+
+		 <div class="pages clearfix text-center">
+		 <ul>
+			<li><a href="{% url 'detail' %}"><i class="fa fa-chevron-left"></i></a></li>
+			<li class="act"><a href="{% url 'detail' %}">1</a></li>
+			<li><a href="{% url 'detail' %}">2</a></li>
+			<li><a href="{% url 'detail' %}">3</a></li>
+			<li><a href="{% url 'detail' %}">4</a></li>
+			<li><a href="{% url 'detail' %}">5</a></li>
+			<li><a href="{% url 'detail' %}">6</a></li>
+			<li><a href="{% url 'detail' %}"><i class="fa fa-chevron-right"></i></a></li>
+		   </ul>
+	  </div>
+	   </div>
+	 </div>
+	</div>
+   </div>
+  </div>
+</section>
+
+{%endblock%}

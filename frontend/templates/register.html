@@ -1,0 +1,64 @@
+{%extends 'base.html'%}
+
+{%block content%}
+
+<section id="center" class="center_list clearfix"> 
+  <div class="container">
+   <div class="row">
+    <div class="center_list_1 text-center clearfix">
+	 <div class="col-sm-12">
+	   <h5 class="mgt"><a href="login.html">Home</a> / Register </h5>
+	 </div>
+	</div>
+   </div>
+  </div>
+</section>
+
+<section id="register">
+ <div class="container">
+  <div class="row">
+   <div class="register_1 clearfix">
+    <div class="col-sm-6 space_left">
+	 <div class="register_1l clearfix">
+	  <div class="register_1li clearfix">
+	   <h3 class="mgt">Welcome to A4 STUDIO</h3>
+	   <p>Nulla quis sem at nibh imperdiet Duis sagittis ipsum Praesent mauris.</p>
+	   <h4 class="c_text">Create a New Account</h4>
+	  </div>
+	  <div class="register_1li1 clearfix">
+	  <form method="POST" action="{% url 'register' %}">
+    {% csrf_token %}
+
+    {{ form.as_p }}
+
+	  <div class="register_1li2 clearfix">
+	   <p>
+	   I am a
+	   <span><input class="check" type="checkbox"></span>
+	   Buyer
+	   <span><input class="check" type="checkbox"></span>
+	   Supplyer
+	   <span><input class="check" type="checkbox"></span>
+	   Both	   </p>
+	  </div>
+	   <div class="col-sm-12 space_all">
+	     <h6 class="term"><input class="check" type="checkbox"> I agree with website <a class="c_text" href="#">Terms and Services</a></h6>
+	   </div>
+	   <div class="col-sm-12 space_all">
+	     <span class="tick_box"><input class="check" type="checkbox"> Remember Me</span>
+		   <h5> <button class="button" type="submit" style="border:none;">Register</button></h5>
+	  </form>
+	   </div>
+	  </div>
+	 </div>
+	</div>
+	<div class="col-sm-6">
+	 <div class="register_1r clearfix">
+	  <img src="../../static/img/39.jpg" class="iw" alt="abc">	 </div>
+	</div>
+   </div>
+  </div>
+	</div>
+</section>
+
+{%endblock%}
