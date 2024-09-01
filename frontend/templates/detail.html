@@ -1,187 +1,160 @@
-{%extends 'base.html'%}
+{% extends 'base.html' %}
+{% load mathfilters %}
+{% block content %}
 
-{%block content%}
+<style>
+  .fa-star {
+      font-size: 1.5rem;
+      color: #ddd;
+      cursor: pointer;
+  }
+
+  .fa-star.checked {
+      color: gold;
+  }
+</style>
+
 
 <section id="center" class="center_list clearfix"> 
   <div class="container">
-   <div class="row">
-    <div class="center_list_1 text-center clearfix">
-	 <div class="col-sm-12">
-	   <h5 class="mgt"><a href="#">Home</a> / List Detail</h5>
-	 </div>
-	</div>
-   </div>
+    <div class="row">
+      <div class="center_list_1 text-center clearfix">
+        <div class="col-sm-12">
+          <h5 class="mgt"><a href="#">Home</a> / List Detail</h5>
+        </div>
+      </div>
+    </div>
   </div>
 </section>
 
-{%include 'base_product.html'%}
+{% include 'base_product.html' %}
 
-	 <div class="col-sm-9">
-	 <div class="detail_1l clearfix">
-      <div class="col-sm-5 space_left">
-				  <img title="" src="{{product.image.url}}" alt="abc" class="iw" style="height:500px; width: 800px;">
-	   </div>
-	   </div>
-	  </div>
-	  <div class="col-sm-7 space_left">
-	   <div class="detail_1lr clearfix">
-	    <div class="detail_1lri clearfix">
-			<br>
-		 <h4 class="mgt">{{product.name}}</h4>
-
-		 <h6>
-		 <span class="span_1">
-		  <i class="fa fa-star-o"></i>
-		  <i class="fa fa-star-o"></i>
-		  <i class="fa fa-star-o"></i>
-		  <i class="fa fa-star-o"></i>
-		  <i class="fa fa-star-o"></i>
-		 </span>
-		  <span class="span_2 col_2">0 Review(s)</span>
-		 </h6>
-		 <ul>
-		  <li>Lightning-fast turnaround times, including one-day production</li>
-		  <li>Multiple premium paper stocks and folding options</li>
-		  <li>Brochure direct mailing services available</li>
-		 </ul>
-		 <hr>
-		 <h3><span class="span_1 col_1">$11.64</span> <span class="span_2">$14.30</span> <span class="span_3 pull-right">In stock SKU: ND7</span></h3>
-		</div>
-		<div class="detail_1lri1 clearfix">
-		 <h5>Select Size:</h5>
-		 <select class="form-control" id="subject" name="subject">
-		<option>No additional charge</option>
-		<option>S No additional charge</option>
-		<option>M +$1.10</option>
-		<option>L +$2.20</option>
-		</select>
-		</div>
-		<div class="detail_1lri2 clearfix">
-		 <h5>Select Color:</h5>
-		 <ul>
-		  <li class="bg_1"></li>
-		  <li class="bg_2"></li>
-		  <li class="bg_3"></li>
-
-		 </ul>
-		</div>
-		<div class="detail_1lri3 clearfix">
-		 <div class="col-sm-6 space_left">
-		  <div class="detail_1lri3l clearfix">
-		   <h5 class="mgt">Quantity:</h5>
-		   <div class="input-group number-spinner">
-				<span class="input-group-btn">
-					<button class="btn btn-default" data-dir="dwn"><span class="glyphicon glyphicon-minus"></span></button>
-				</span>
-				<input type="text" class="form-control text-center" value="1">
-				<span class="input-group-btn">
-					<button class="btn btn-default" data-dir="up"><span class="glyphicon glyphicon-plus"></span></button>
-				</span>			</div>
-		  </div>
-		 </div>
-		 <div class="col-sm-6 space_right">
-		  <div class="detail_1lri3r clearfix">
-		   <h5 class="mgt text-right"><a class="button mgt" href="#">ADD TO CART</a></h5>
-		  </div>
-		 </div>
-		</div>
-		<div class="detail_1lri4 clearfix">
-        <h5>Array</h5>
-		<hr>
-		<ul>
-		 <li><a href="#"><i class="fa fa-repeat"></i> Add to Compare</a></li>
-		 <li><a href="#"><i class="fa fa-heart-o"></i> Add to Wishlist</a></li>
-		 <li><a href="#"><i class="fa fa-share-alt"></i> Share</a></li>
-		</ul>
-		</div>
-	   </div>
-	  </div>
-	 </div>
-
-	</div>
-	</div><br>
-	<div class="list_1 text-center clearfix">
-    <div class="col-sm-12">  
-	 <h2 class="mgt">You Might Also Like</h2>
-	</div>
-   </div>
-	<div class="list_pg_1r1 clearfix">
-		   <div class="col-sm-3">
-				   <div class="list_2im clearfix">
-				    <div class="list_2imi clearfix">
-				   <img src="../../static/img/15.jpg" class="iw" alt="abc">
-				  </div> 
-				    <div class="list_2imi1 clearfix">
-				   <h5 class="mgt normal">New</h5>
-				  </div>
-				    <div class="list_2imi2 clearfix">
-					   <span><a href="#"><i class="fa fa-eye"></i></a></span>
-					  </div>
-				 </div>
-				   <div class="list_2im1 clearfix">
-				    <h4><a href="#">Semper Porta</a></h4>
-					<h5><a class="col_1 bold" href="{% url 'detail' %}"><span>£60.00</span> £50.00</a></h5>
-					<h6><a class="button mgt" href="#">Add To Cart</a></h6>
-				   </div>
-				 </div>
-		   <div class="col-sm-3">
-				   <div class="list_2im clearfix">
-				    <div class="list_2imi clearfix">
-				   <img src="../../static/img/16.jpg" class="iw" alt="abc">
-				  </div> 
-				    <div class="list_2imi1 clearfix">
-				   <h5 class="mgt normal">New</h5>
-				  </div>
-				    <div class="list_2imi2 clearfix">
-					   <span><a href="#"><i class="fa fa-eye"></i></a></span>
-					  </div>
-				 </div>
-				   <div class="list_2im1 clearfix">
-				    <h4><a href="#">Per Conubia</a></h4>
-					<h5><a class="col_1 bold" href="{% url 'detail' %}"><span>£60.00</span> £50.00</a></h5>
-					<h6><a class="button mgt" href="#">Add To Cart</a></h6>
-				   </div>
-				 </div>
-		   <div class="col-sm-3">
-				   <div class="list_2im clearfix">
-				    <div class="list_2imi clearfix">
-				   <img src="../../static/img/17.jpg" class="iw" alt="abc">
-				  </div> 
-				    <div class="list_2imi1 clearfix">
-				   <h5 class="mgt normal">New</h5>
-				  </div>
-				    <div class="list_2imi2 clearfix">
-					   <span><a href="#"><i class="fa fa-eye"></i></a></span>
-					  </div>
-				 </div>
-				   <div class="list_2im1 clearfix">
-				    <h4><a href="#">Dapibus Diam</a></h4>
-					<h5><a class="col_1 bold" href="{% url 'detail' %}"><span>£60.00</span> £50.00</a></h5>
-					<h6><a class="button mgt" href="#">Add To Cart</a></h6>
-				   </div>
-				 </div>
-		   <div class="col-sm-3">
-				   <div class="list_2im clearfix">
-				    <div class="list_2imi clearfix">
-				   <img src="../../static/img/18.jpg" class="iw" alt="abc">
-				  </div> 
-				    <div class="list_2imi1 clearfix">
-				   <h5 class="mgt normal">New</h5>
-				  </div>
-				    <div class="list_2imi2 clearfix">
-					   <span><a href="#"><i class="fa fa-eye"></i></a></span>
-					  </div>
-				 </div>
-				   <div class="list_2im1 clearfix">
-				    <h4><a href="#">Eget Nulla</a></h4>
-					<h5><a class="col_1 bold" href="{% url 'detail' %}"><span>£60.00</span> £50.00</a></h5>
-					<h6><a class="button mgt" href="#">Add To Cart</a></h6>
-				   </div>
-				 </div>
-		 </div>
-   </div>
+<div class="col-sm-9">
+  <div class="detail_1l clearfix">
+    <div class="col-sm-5 space_left">
+      <img title="" src="{{ product.image.url }}" alt="abc" class="iw" style="height:500px; width: 800px;">
+    </div>
   </div>
-</section>
+</div>
 
+<div class="col-sm-7 space_left">
+  <div class="detail_1lr clearfix">
+    <div class="detail_1lri clearfix">
+      <br>
+      <h4 class="mgt">{{ product.name }}</h4>
+      {% comment %} <h6>
+        <span class="span_1">
+          <i class="fa fa-star-o"></i>
+          <i class="fa fa-star-o"></i>
+          <i class="fa fa-star-o"></i>
+          <i class="fa fa-star-o"></i>
+          <i class="fa fa-star-o"></i>
+        </span>
+        <span class="span_2 col_2">0 Review(s)</span>
+      </h6> {% endcomment %}
+      <div class="review-section">
+        <h3>Reviews</h3>
+        <div class="review-list">
+            {% for review in reviews %}
+                <div class="review">
+                    <strong>{{ review.user.username }}</strong>
+                    <div class="stars">
+                        {% for i in 5|times %}
+                            <span class="fa fa-star {% if review.rating >= i %}checked{% endif %}"></span>
+                        {% endfor %}
+                    </div>
+                    <p>{{ review.comment }}</p>
+                </div>
+            {% endfor %}
+        </div>
+    
+        <h4>Leave a Review:</h4>
+        <form method="post" id="reviewForm">
+            {% csrf_token %}
+            <div class="star-rating">
+                <span class="fa fa-star" data-value="1"></span>
+                <span class="fa fa-star" data-value="2"></span>
+                <span class="fa fa-star" data-value="3"></span>
+                <span class="fa fa-star" data-value="4"></span>
+                <span class="fa fa-star" data-value="5"></span>
+            </div>
+            <input type="hidden" name="rating" id="ratingInput" value="1">
+            <textarea name="comment" placeholder="Write your review here..."></textarea>
+            <button type="submit">Submit Review</button>
+        </form>
+    </div>
+    
+    
+      <ul>
+        <li>Lightning-fast turnaround times, including one-day production</li>
+        <li>Multiple premium paper stocks and folding options</li>
+        <li>Brochure direct mailing services available</li>
+      </ul>
+      <hr>
 
-{%endblock%}
+      <!-- New Section: Display User Who Added the Product -->
+      <div class="product-added-by">
+        <spam>Added by:</span>
+        {% if product.user %}
+            <a href="{% url 'userprofile' product.user.id %}">{{ product.user.username }}</a>
+        {% else %}
+            <span>Unknown User</span>
+        {% endif %}
+      </div>
+
+      <div class="detail_1lri3 clearfix">
+        <div class="detail_1lri3l clearfix">
+          <div class="col-sm-6 space_right">
+            <div class="detail_1lri3r clearfix">
+              <h5 class="mgt text-right"><a href="{% url 'download_image' product.id %}" class="button mgt">Download Image</a></h5>
+            </div>
+          </div>
+        </div>
+
+        <div class="detail_1lri4 clearfix">
+          <hr>
+          <ul>
+            <li><a href="#"><i class="fa fa-repeat"></i> Add to Compare</a></li>
+            <li><a href="#"><i class="fa fa-heart-o"></i> Add to Wishlist</a></li>
+            <li><a href="#"><i class="fa fa-share-alt"></i> Share</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<br>
+
+<div class="list_1 text-center clearfix">
+  <div class="col-sm-12">  
+    <h2 class="mgt">You Might Also Like</h2>
+  </div>
+</div>
+
+<div class="list_pg_1r1 clearfix">
+  <!-- Repeat the "You Might Also Like" Section as is -->
+</div>
+
+{% endblock %}
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+      const stars = document.querySelectorAll('.star-rating .fa-star');
+      const ratingInput = document.getElementById('ratingInput');
+
+      stars.forEach(star => {
+          star.addEventListener('click', function() {
+              const rating = this.getAttribute('data-value');
+              ratingInput.value = rating;
+
+              stars.forEach(s => s.classList.remove('checked'));
+              this.classList.add('checked');
+              let previousStar = this.previousElementSibling;
+              while (previousStar) {
+                  previousStar.classList.add('checked');
+                  previousStar = previousStar.previousElementSibling;
+              }
+          });
+      });
+  });
+</script>

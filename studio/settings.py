@@ -9,7 +9,6 @@ https://docs.djangoproject.com/en/5.0/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.0/ref/settings/
 """
-from decouple import config
 from pathlib import Path
 import os
 
@@ -39,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'frontend',
+    'mathfilters'
 ]
 
 MIDDLEWARE = [
@@ -75,10 +75,15 @@ WSGI_APPLICATION = 'studio.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
 
+
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'studio_db',
+        'USER': 'root',
+        'PASSWORD': 'mind_notfound112',
+        'HOST':'127.0.0.1',
+        'PORT':'3306',
     }
 }
 
@@ -110,6 +115,7 @@ EMAIL_HOST_USER = 'aimaarif567@gmail.com'
 EMAIL_HOST_PASSWORD = 'etiz dqxj ydnl hsus'
 DEFAULT_FROM_EMAIL = 'aimaarif567@gmail.com'
 SERVER_EMAIL = 'aimaarif567@gmail.com'
+ADMIN_EMAIL = 'aimaarif567@gmail.com'
 
 
 # Internationalization
@@ -133,6 +139,7 @@ STATICFILES_DIRS = ['static/']
 MEDIA_URL = 'media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
+LOGIN_URL = '/login/'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field

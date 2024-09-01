@@ -24,35 +24,38 @@
 	   <h4 class="col_1 mgt">Get in touch</h4>
 	   <h3>Write Us A Message</h3>
 	  </div><br>
-	  <div class="checkout_1l1 clearfix">
-       <div class="col-sm-6 space_left">
-	    <h5>Your Name <span class="col_3">*</span></h5>
-		<input class="form-control" type="text">
-	   </div>
-	   <div class="col-sm-6 space_left">
-	    <h5>Your Subjects <span class="col_3">*</span></h5>
-		<input class="form-control" type="text">
-	   </div>
-	  </div>
-	  <div class="checkout_1l1 clearfix">
-       <div class="col-sm-6 space_left">
-	    <h5>Your Email<span class="col_3">*</span></h5>
-		<input class="form-control" type="text">
-	   </div>
-	   <div class="col-sm-6 space_left">
-	    <h5>Your Phone <span class="col_3">*</span></h5>
-		<input class="form-control" type="text">
-	   </div>
-	  </div>
-	  <div class="checkout_1l1 clearfix">
-	   <div class="col-sm-12 space_left">
-	    <h5>Your Message <span class="col_3">*</span></h5>
-		<textarea class="form-control form_1"></textarea>
-		<h6><a class="button" href="#">SEND MESSAGE</a></h6>
-	   </div>
-	  </div>
-	 </div>
-	 </div>
+	  <form method="post" action="{% url 'contact' %}">
+		{% csrf_token %}
+		<div class="checkout_1l1 clearfix">
+			<div class="col-sm-6 space_left">
+				<h5>Your Name <span class="col_3">*</span></h5>
+				<input class="form-control" type="text" name="name" required>
+			</div>
+			<div class="col-sm-6 space_left">
+				<h5>Your Subjects <span class="col_3">*</span></h5>
+				<input class="form-control" type="text" name="subject" required>
+			</div>
+		</div>
+		<div class="checkout_1l1 clearfix">
+			<div class="col-sm-6 space_left">
+				<h5>Your Email<span class="col_3">*</span></h5>
+				<input class="form-control" type="email" name="email" required>
+			</div>
+			<div class="col-sm-6 space_left">
+				<h5>Your Phone <span class="col_3">*</span></h5>
+				<input class="form-control" type="text" name="phone">
+			</div>
+		</div>
+		<div class="checkout_1l1 clearfix">
+			<div class="col-sm-12 space_left">
+				<h5>Your Message <span class="col_3">*</span></h5>
+				<textarea class="form-control form_1" name="message" required></textarea>
+				<h6><button class="button" type="submit">SEND MESSAGE</button></h6>
+			</div>
+		</div>
+	</form>	
+	</div>
+    </div>
 	 <div class="col-sm-4">
 	  <div class="contact_1rm clearfix">
 	    <div class="contact_1r1 mgt clearfix">
