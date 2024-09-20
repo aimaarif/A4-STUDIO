@@ -4,6 +4,8 @@ from django.contrib.auth.models import User
 from django.db.models.signals import post_save
 from django.db.models.signals import post_save
 from django.dispatch import receiver
+from django.conf import settings
+from django.utils import timezone
 # Create your models here.
 
 
@@ -13,7 +15,6 @@ class UserProfile(models.Model):
     bio = models.TextField(max_length=500, blank=True)
     profile_image = models.ImageField(upload_to='uploads/profile_pics/', default='uploads/profile_pics/default.png', blank=True, null=True)
     following = models.ManyToManyField('self', symmetrical=False, related_name='followers', blank=True)
-    
 
     def __str__(self):
         return f"{self.user.first_name} ({self.user.username})"
@@ -77,21 +78,34 @@ class Category(models.Model):
 		verbose_name_plural = 'categories'
 
 class Product(models.Model):
-	name = models.CharField(max_length=200)
-	category = models.ForeignKey(Category, on_delete=models.CASCADE, default=1)
-	image = models.ImageField(upload_to='uploads/product/')
-	user = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True)
+    name = models.CharField(max_length=200)
+    created_at = models.DateTimeField(default=timezone.now)
+    category = models.ForeignKey(Category, on_delete=models.CASCADE, default=1)
+    image = models.ImageField(upload_to='uploads/product/')
+    user = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True)
 
-
-	def __str__(self):
-		return self.name
-      
-class Review(models.Model):
-    product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name='reviews')
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
-    rating = models.PositiveIntegerField(default=1)  # Rating out of 5
-    comment = models.TextField(blank=True, null=True)
-    created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return f"{self.user.username} - {self.rating} Stars"
+	    return self.name
+      
+class ProductReview(models.Model):
+    product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name='reviews')
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    rating = models.IntegerField(default=1)  # Rating out of 5
+
+    class Meta:
+        unique_together = ('product', 'user')  # Ensures a user can only review a product once
+
+    def __str__(self):
+        return f"{self.product.name} - {self.rating} Stars"
+    
+
+class Wishlist(models.Model):
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='wishlists')
+    product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name='wishlist_items')
+
+    class Meta:
+        unique_together = ('user', 'product')
+
+    def __str__(self):
+        return f"{self.user}'s wishlist item: {self.product.name}"

@@ -3,12 +3,12 @@
 
 <style>
     .add-product-container {
-        max-width: 800px;
+        max-width: 1000px;
         margin: 20px auto;
         padding: 20px;
-        background-color: #f8f9fa; /* Light gray background */
-        border-radius: 10px; /* Rounded corners */
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+        background-color: #CFFFDC; 
+        border-radius: 10px; 
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
     }
 
     .add-product-title {
@@ -17,23 +17,13 @@
         margin-bottom: 20px;
         text-align: center;
     }
-
+    
     .add-product-form button[type="submit"] {
-        background-color: #007bff; /* Bootstrap primary color */
-        color: white;
         border: none;
-        padding: 10px 20px;
-        border-radius: 5px;
-        font-size: 1em;
-        cursor: pointer;
-        transition: background-color 0.3s;
-        width: 100%; /* Make button full width */
-        margin-top: 10px;
+        margin-top:20px !important; 
     }
 
-    .add-product-form button[type="submit"]:hover {
-        background-color: #0056b3; /* Darker blue on hover */
-    }
+    
 </style>
 
 <div class="add-product-container">
@@ -41,7 +31,7 @@
     <form method="post" enctype="multipart/form-data" class="add-product-form">
         {% csrf_token %}
         {{ form.as_p }}
-        <button type="submit">Add Product</button>
+        <button class="button mgt" type="submit">Add Product</button>
     </form>
 </div>
 

@@ -1,104 +1,12 @@
 {% extends "base.html" %}
 {% load static %}
 {% block content %}
-
-<style>
-    .profile-container {
-        max-width: 800px;
-        margin: 20px auto;
-        padding: 20px;
-        background-color: #f8f9fa; /* Light gray background */
-        border-radius: 10px; /* Rounded corners */
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
-    }
-
-    .profile-info {
-        display: flex;
-        align-items: center;
-        padding-bottom: 20px; /* Space below profile section */
-        border-bottom: 1px solid #e9ecef; /* Bottom border */
-    }
-
-    .profile-info img {
-        margin-right: 16px; /* More space between image and username */
-        border-radius: 50%; /* Circular image */
-    }
-
-    .profile-details {
-        flex: 1;
-    }
-
-    .profile-details h4 {
-        margin: 0;
-        font-size: 1.5em; /* Larger font size */
-    }
-
-    .profile-edit-form {
-        margin-top: 20px;
-    }
-
-    .profile-edit-form label {
-        font-weight: bold;
-        margin-top: 10px;
-    }
-
-    .profile-edit-form button {
-        margin-top: 15px;
-        background-color: #007bff;
-        color: white;
-        border: none;
-        padding: 10px 20px;
-        border-radius: 5px;
-    }
-
-    .profile-edit-form button:hover {
-        background-color: #0056b3; /* Darker shade on hover */
-    }
-
-    .category-list,
-    .product-list {
-        list-style-type: none; /* Remove default bullet points */
-        padding: 0;
-    }
-
-    .category-list li,
-    .product-list li {
-        padding: 10px 0;
-        border-bottom: 1px solid #e9ecef;
-    }
-
-    .category-list li a {
-        color: #007bff;
-        text-decoration: none;
-    }
-
-    .category-list li a:hover {
-        text-decoration: underline;
-    }
-
-    .product-list img {
-        margin-left: 10px;
-        border-radius: 5px; /* Rounded corners for product images */
-    }
-
-    .edit-profile-button {
-        display: inline-block;
-        margin-top: 10px;
-        background-color: #007bff;
-        color: white;
-        padding: 8px 16px;
-        text-decoration: none;
-        border-radius: 5px;
-    }
-
-    .edit-profile-button:hover {
-        background-color: #0056b3;
-    }
-</style>
+<link href="../../static/css/profile.css" rel="stylesheet">
 
 <div class="profile-container">
+    <!-- Edit profile option -->
     {% if is_editing %}
-        <form method="post" enctype="multipart/form-data" class="profile-edit-form">
+        <form method="post" enctype="multipart/form-data" class="profile-edit-form" id="form-group">
             {% csrf_token %}
             <div>
                 <label for="id_username">Username:</label>
@@ -116,18 +24,24 @@
             </div>
 
             <div>
+                <label for="id_bio">Bio:</label>
+                {{ form.bio }}
+            </div>
+
+            <div>
                 <label for="id_profile_image">Profile Image:</label>
                 {{ form.profile_image }}
             </div>
             
-            <div>
-                <label for="id_bio">Bio:</label>
-                {{ form.bio }}
-            </div>
-            
-            <button type="submit">Save Changes</button>
+            <button class="button mgt" type="submit">Save Changes</button>
+
         </form>
+
+
     {% else %}
+
+        <!-- Profile page shown to the user if it is not editing-->
+
         <div class="profile-info">
             {% if user_profile.profile_image %}
                 <img src="{{ user_profile.profile_image.url }}" alt="Profile Image" width="80px" height="80px">
@@ -139,52 +53,127 @@
                 <p>@{{ user.username }}</p>
                 <p>{{ user.userprofile.bio }}</p>
             </div>
-
-            <div class="mt-4">
-                <a href="?show=following" class="edit-profile-button">Following</a>
-                <ul class="following-list">
-                {% if show_following %}
-                    {% for followed_user in following_users %}
-                        <li><a href="{% url 'userprofile' followed_user.user.id %}">{{ followed_user.user.username }}</a></li>
-                    {% empty %}
-                        <li>This user is not following anyone yet.</li>
-                    {% endfor %}
-            {% endif %}
-                </ul>
-            </div>
-
-            <!-- Display follow/unfollow button based on whether the user is already following the profile owner -->
-            {% if request.user != user_profile.user %}
-                {% if user_profile in request.user.userprofile.following.all %}
-                    <a href="{% url 'unfollow_user' user_profile.user.id %}" class="btn btn-danger">Unfollow</a>
-                {% else %}
-                    <a href="{% url 'follow_user' user_profile.user.id %}" class="btn btn-primary">Follow</a>
-                {% endif %}
-            {% endif %}
+            <a href="?edit=true" class="button mgt">Edit Profile</a>
         </div>
         
         <div class="mt-4">
-            <h5>Main Categories</h5>
+            <ul>
+                <li>
+                    <a href="?show=following" class="col_1 bold">Favorite Creators</a>
+                </li>
+                    <ul class="following-list">
+                        {% if show_following %}
+                        {% for followed_user in following_list %}
+                            <div class="col-sm-6" style="margin:0; padding:0">
+                            <li><h5><a href="{% url 'profile' followed_user.user.id %}">{{ followed_user.user.username }}</a></h5></li>
+                            </div>
+                            <!-- Display follow/unfollow button based on whether the user is already following the profile owner -->
+                            <div class="col-sm-6 text-right" style="margin:0; padding:0">
+                            {% if request.user != followed_user.user %}
+                                {% if followed_user in request.user.userprofile.following.all %}
+                                    <a href="{% url 'unfollow_user' followed_user.user.id %}" class="button mgt">Unfavorite</a>
+                                {% else %}
+                                    <a  href="{% url 'follow_user' followed_user.user.id %}" class="button mgt">Add to Favorites</a>
+                                {% endif %}
+                            {% endif %}
+                           </div>
+                        {% empty %}
+                            <li>You've not added anyone yet.</li>
+                        {% endfor %}
+                    {% endif %}    
+                    <br>
+                    </ul>
+
+                <li class="wishlist-item">
+                    <a class="col_1 bold" href="?show=wishlist_items">Wishlist</a>
+                    {% if show_wishlist %}
+                        <ul class="product-list list_pg_1r1 clearfix">
+                            <div class="clearfix">
+                                {% for item in wishlist_items %}
+                                <div class="col-sm-4 space_left">
+                                    <div class="list_2im clearfix">
+                                        <div class="list_2imi clearfix">
+                                            <img src="{{ item.product.image.url }}" class="iw" alt="Product Image" width="300px" height="200px">
+                                        </div>
+                                    </div>
+                                    <div class="list_2im1 clearfix">
+                                        <h4><a href="{% url 'detail' item.product.id %}">{{ item.product.name }}</a></h4>
+                                        <h6><a class="button mgt" href="{% url 'detail' item.product.id %}">View</a></h6>
+                                    </div>
+                                </div>
+                                {% empty %}
+                                <li>There's nothing in wishlist yet.</li>
+                                {% endfor %}
+                            </div>
+                        </ul>
+                    {% endif %}
+                </li>
+                    
+            </ul>
+
             <ul class="category-list">
-                {% for maincategory in maincategories %}
-                    <li><a href="{% url 'category_view' maincategory.id %}">{{ maincategory.name }}</a></li>
-                {% endfor %}
+                <div class="ziehharmonika">
+                    <h3 data-prefix="★" class="active">
+                        Upload Products Here.
+                        <div class="collapseIcon">+</div>
+                    </h3>
+                    <div class="clickable" style="display: none;">
+                        <ul style="list-style-type: none;">
+                            {% for maincategory in maincategories %}
+                            <li>
+                                <a class="col_1 bold" href="{% url 'category_user' maincategory.id %}">~ {{ maincategory.name }}</a>
+                            </li>
+                            {% endfor %} 
+                        </ul>
+                    </div>       
+                </div>
             </ul>
         </div>
         
         <div class="mt-4">
             <h5>Your Products</h5>
-            <ul class="product-list">
-                {% for product in user_products %}
-                    <li>{{ product.name }} - <img src="{{ product.image.url }}" alt="{{ product.name }}" width="100"></li>
-                {% empty %}
+            <ul class="product-list list_pg_1r1 clearfix">
+                <div class="clearfix">
+                    {% for product in user_products %}
+                    <div class="col-sm-4 space_left">
+                        <div class="list_2im clearfix">
+                            <div class="list_2imi clearfix">
+                                <img src="{{ product.image.url }}" class="iw" alt="Product Image" width="300px" height="200px">
+                            </div>
+                        </div>
+                        <div class="list_2im1 clearfix">
+                            <h4><a href="{% url 'detail' product.id %}">{{ product.name }}</a></h4>
+                            <h6><a class="button mgt" href="{% url 'detail' product.id %}">View</a></h6>
+                        </div>
+                    </div>
+                    {% empty %}
                     <li>No products added yet.</li>
-                {% endfor %}
+                    {% endfor %}
+                </div>
             </ul>
         </div>
-
-        <a href="?edit=true" class="edit-profile-button">Edit Profile</a>
+         
     {% endif %}
 </div>
+
+<!-- For + sign functionality  -->
+<script>
+    $(document).ready(function() {
+        $('h3 .collapseIcon').on('click', function() {
+            var $this = $(this);
+            var $clickable = $this.closest('h3').next('.clickable');
+            
+            $clickable.slideToggle(); // Toggle the visibility of categories
+            
+            // Toggle the icon between '+' and '-'
+            if ($this.text() === "+") {
+                $this.text("-");
+            } else {
+                $this.text("+");
+            }
+        });
+    });
+    
+ </script>
 
 {% endblock %}

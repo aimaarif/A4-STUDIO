@@ -6,19 +6,24 @@ from .forms import RegisterForm, ContactForm, SubscriberForm
 from .models import Product, Category, MainCategory, UserProfile
 from django.http import FileResponse, Http404
 from django.shortcuts import get_object_or_404
-from .models import Product, Review
+from .models import Product, ProductReview, Wishlist
+from .forms import ProductReviewForm
 from django.core.mail import send_mail
 from django.conf import settings
 from .forms import UserProfileForm, ProductForm, ProfileImageForm
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
+from django.db import models, IntegrityError
+from django.db.models import Avg
+from django.core.paginator import Paginator
 
 def home(request):
-	categories = Category.objects.all()
-	half = len(categories) // 2
-	categories1 = categories[:half]
-	categories2 = categories[half:]
-	return render(request, 'home.html', {'categories1': categories1, 'categories2': categories2})
+    categories = Category.objects.all()
+    half = len(categories) // 2
+    categories1 = categories[:half]
+    categories2 = categories[half:]
+
+    return render(request, 'home.html', {'categories1': categories1, 'categories2': categories2,})
 
 def about(request):
 	return render(request, 'about.html', {})
@@ -44,15 +49,7 @@ def contact(request):
     
     return render(request, 'contact.html', {'form': form})
 
-
-def detail(request):
-	return render(request, 'detail.html', {})
 	
-def blog(request):
-	return render(request, 'blog.html', {})
-
-def blog_detail(request):
-	return render(request, 'blog_detail.html', {})
 
 def login_user(request):
 	if request.method == "POST":
@@ -106,23 +103,81 @@ def register(request):
     return render(request, 'register.html', {'form': form})
 
 def product(request):
-	products = Product.objects.all()
-	return render(request, 'product.html', {'products': products})
+    sort_option = request.GET.get('sort', '')
 
+    if sort_option == 'rating_asc':
+        products = Product.objects.annotate(avg_rating=Avg('reviews__rating')).order_by('avg_rating')
+    elif sort_option == 'rating_desc':
+        products = Product.objects.annotate(avg_rating=Avg('reviews__rating')).order_by('-avg_rating')
+    elif sort_option == 'name_asc':
+        products = Product.objects.all().order_by('name')
+    elif sort_option == 'name_desc':
+        products = Product.objects.all().order_by('-name')
+    elif sort_option == 'date_desc':
+        products = Product.objects.all().order_by('-created_at')
+    elif sort_option == 'date_asc':
+        products = Product.objects.all().order_by('created_at')
+    else:
+        products = Product.objects.all()
+
+    paginator = Paginator(products, 12)  # Show 12 products per page
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+    total_products = products.count()
+    maincategories = MainCategory.objects.all()
+
+    context = {
+        'maincategories': maincategories,
+        'products': page_obj,  # Pass the paginated products
+        'page_obj': page_obj,  # Pass the page object for pagination controls
+        'total_products':total_products,
+    }
+
+    return render(request, 'product.html', context)
+
+
+@login_required
 def detail(request, pk):
-    product = Product.objects.get(id=pk)
+    maincategories = MainCategory.objects.all()
+    product = get_object_or_404(Product, id=pk)
     reviews = product.reviews.all()
+    average_rating = reviews.aggregate(models.Avg('rating'))['rating__avg'] or 0
+
     if request.method == 'POST':
-            rating = request.POST.get('rating')
-            comment = request.POST.get('comment')
-            if rating:
-                Review.objects.create(
-                    product=product,
-                    user=request.user,
-                    rating=rating,
-                    comment=comment
-                )
-    return render(request, 'detail.html', {'product': product, 'reviews': reviews,})
+        form = ProductReviewForm(request.POST)
+        if form.is_valid():
+            # Try to get an existing review for the product by the user
+            existing_review = ProductReview.objects.filter(product=product, user=request.user).first()
+            
+            if existing_review:
+                # Update the existing review
+                existing_review.rating = form.cleaned_data['rating']
+                existing_review.save()
+            else:
+                # Create a new review if none exists
+                review = form.save(commit=False)
+                review.product = product
+                review.user = request.user
+                review.save()
+                
+            return redirect('detail', pk=product.pk)  # Redirect after saving/updating
+    else:
+        form = ProductReviewForm()
+
+    context = {
+        'product': product,
+        'reviews': reviews,
+        'average_rating': average_rating,
+        'form': form,
+        'maincategories':maincategories,
+    }
+    return render(request, 'detail.html', context)
+
+
+@login_required
+def wishlist_view(request):
+    wishlist_items = Wishlist.objects.filter(user=request.user)
+    return render(request, 'wishlist.html', {'wishlist_items': wishlist_items})
 
 
 def download_image(request, product_id):
@@ -178,11 +233,13 @@ def profile(request, username=None, user_id=None):
     full_name = f"{user.first_name} {user.last_name}".strip()
     is_editing = request.GET.get('edit', False)
     show_following = request.GET.get('show') == 'following'
+    show_wishlist = request.GET.get('show') == 'wishlist_items'
     if not user_profile.profile_image:
         user_profile.profile_image = 'uploads/profile_pics/default.png'
     maincategories = MainCategory.objects.all()
     user_products = Product.objects.filter(user=user)
     following_list = user_profile.following.all() if show_following else []
+    wishlist_items = Wishlist.objects.filter(user=user) if show_wishlist else []
     context = {
         'user_profile': user_profile, 
         'maincategories': maincategories, 
@@ -192,15 +249,17 @@ def profile(request, username=None, user_id=None):
         'is_editing': is_editing,
         'following_list': following_list,
         'show_following': show_following,
+        'wishlist_items': wishlist_items,
+        'show_wishlist': show_wishlist,
     }
     return render(request, 'profile.html', context)
 
 
 @login_required
-def category(request, maincategory_id):
+def category_user(request, maincategory_id):
     maincategory = MainCategory.objects.get(id=maincategory_id)
     categories = Category.objects.filter(maincategory=maincategory)
-    return render(request, 'category.html', {'categories': categories, 'maincategory': maincategory})
+    return render(request, 'category_user.html', {'categories': categories, 'maincategory': maincategory})
 
 @login_required
 def add_product(request, category_id):
@@ -232,11 +291,13 @@ def userprofile(request, user_id):
     # Remaining logic for handling profile display, form submissions, etc.
     full_name = f"{user_profile.user.first_name} {user_profile.user.last_name}".strip()
     show_following = request.GET.get('show') == 'following'
+    show_wishlist = request.GET.get('show') == 'wishlist_items'
     if not user_profile.profile_image:
         user_profile.profile_image = 'uploads/profile_pics/default.png'
     maincategories = MainCategory.objects.all()
     user_products = Product.objects.filter(user=user_profile.user)
     following_list = user_profile.following.all() if show_following else []
+    wishlist_items = Wishlist.objects.filter(user=user) if show_wishlist else []
     context = {
         'user_profile': user_profile,
         'maincategories': maincategories,
@@ -246,6 +307,8 @@ def userprofile(request, user_id):
         'user': user, 
         'following_list': following_list,
         'show_following': show_following,
+        'wishlist_items': wishlist_items,
+        'show_wishlist': show_wishlist,
     }
     return render(request, 'userprofile.html', context)
 
@@ -278,3 +341,45 @@ def unfollow_user(request, user_id):
         messages.error(request, "You cannot unfollow yourself.")
 
     return redirect('profile', user_id=user_to_unfollow.user.id)
+
+@login_required
+def add_to_wishlist(request, product_id):
+    product = get_object_or_404(Product, id=product_id)
+    wishlist, created = Wishlist.objects.get_or_create(user=request.user, product=product)
+    
+    if created:
+        messages.success(request, f'{product.name} has been added to your wishlist.')
+    else:
+        messages.info(request, f'{product.name} is already in your wishlist.')
+    
+    return redirect('detail', pk=product_id)  # Adjust the redirect as needed
+
+@login_required
+def wishlist_view(request):
+    wishlist_items = Wishlist.objects.filter(user=request.user)
+    return render(request, 'wishlist.html', {'wishlist_items': wishlist_items})
+
+
+def maincategory_detail(request, id):
+    maincategories = MainCategory.objects.all()
+    maincategory = get_object_or_404(MainCategory, id=id)
+    categories = maincategory.category_set.all()
+    total_categories = categories.count()
+    paginator = Paginator(categories, 3)
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+    return render(request, 'maincategory_detail.html', {'maincategory': maincategory, 'maincategories': maincategories, 'total_categories': total_categories, 'page_obj': page_obj})
+
+def category_detail(request, id):
+    maincategories = MainCategory.objects.all()
+    category = get_object_or_404(Category, id=id)
+    products = category.product_set.all()
+    total_products = products.count()
+    return render(request, 'category_detail.html', {'category': category, 'products': products, 'maincategories': maincategories, 'total_products': total_products,})
+
+
+def blog(request):
+	return render(request, 'blog.html', {})
+
+def blog_detail(request):
+	return render(request, 'blog_detail.html', {})

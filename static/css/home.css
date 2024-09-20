@@ -76,8 +76,8 @@ transition: 2s all ease-in-out .1s;
     width: 100%;
     height: 100%;
     z-index: 2;
-    opacity: 1;
-	background:#000000b8;
+    opacity: 0.1;
+	background:#253D2Cb8;
 }
 
 /********************************/
@@ -96,15 +96,15 @@ transition: 2s all ease-in-out .1s;
   background-repeat: no-repeat;
 }
 .fade-carousel .slides .slide-1 {
-background-image: url(../img/7.jpg);
+background-image: url(../img/Frame3.png);
 background-position:center;
 }
 .fade-carousel .slides .slide-2 {
-background-image: url(../img/8.jpg);
+background-image: url(../img/Frame1.png);
 background-position:center;
 }
 .fade-carousel .slides .slide-3 {
-background-image: url(../img/9.jpg);
+background-image: url(../img/Frame2.png);
 background-position:center;
 }
 #center .carousel-indicators{
@@ -120,8 +120,8 @@ border-radius:0;
 .fade-carousel .carousel-indicators > li.active{
 width:14px;
 height:14px;
-background:#788954;
-border-color:#788954;
+background:#2E6F40;
+border-color:#2E6F40;
   }
 /*********************center_home_end****************/
 
@@ -131,28 +131,28 @@ padding-top:40px;
 padding-bottom:40px; 
  }
 .offer_1l {
-background-image: url(../img/10.jpg);
+background-image: url(../img/viewmore.jpg);
 background-position:center;
 min-height:435px;
 }
 .offer_1li{
-background:#0000007a;
+background:#253D2C7a;
 padding:120px 60px; 
 min-height:435px;
  }
 .offer_1ri{
-background:#0000007a;
+background:#253D2C7a;
 min-height:435px;
-border:5px solid #000;
+border:5px solid #253D2C;
 padding-top:20px;
  }
 .offer_1r {
-background-image: url(../img/11.jpg);
+background-image: url(../img/viewside.jpg);
 background-position:center;
 min-height:435px;
 }
 .offer_2i span{
-background:#788954;
+background:#2E6F40;
 color:#fff;
 width:80px;
 height:80px;
@@ -161,24 +161,24 @@ display:inline-block;
 font-size:30px;
 text-align:center;
 border-radius:50%; 
-border:3px solid #788954;
+border:3px solid #2E6F40;
  }
 .offer_2i span:hover{
 background:none;
-color:#788954;
+color:#2E6F40;
  }
 .offer_2{
 margin-top:40px; 
  }
 .offer_2i{
-background:#f3fbe2;
+background:#CFFFDC;
 padding:40px 20px;
  }
 /*********************offer_end****************/
 
 /*********************list****************/
 #list{
-background:#f3fbe2;
+background:#CFFFDC;
 padding-top:40px;
 padding-bottom:40px;
  }
@@ -186,7 +186,7 @@ padding-bottom:40px;
 display: inline-block;
 width: 10%;
 height: 2px;
-background-color: #788954;
+background-color: #2E6F40;
 vertical-align: middle;
 margin-right: 1%;
 content: "";
@@ -195,7 +195,7 @@ content: "";
 display: inline-block;
 width: 10%;
 height: 2px;
-background-color: #788954;
+background-color: #2E6F40;
 vertical-align: middle;
 margin-left: 1%;
 content: "";
@@ -204,25 +204,25 @@ content: "";
 margin-top:30px; 
  }
 .list_3 .btn-success {
-background: #788954;
+background: #2E6F40;
 border-radius: 0;
 padding: 0;
 border: none;
 width: 40px;
 height: 40px;
 line-height: 40px;
-border: 1px solid #788954;
+border: 1px solid #2E6F40;
 margin-left: 3px;
 margin-right: 3px;
 text-align: center;
 }
 .list_3 .btn-success:hover {
 background: none;
-border-color: #788954;
-color: #788954;
+border-color: #2E6F40;
+color: #2E6F40;
 }
 .list_2imi1 h5{
-background:#788954;
+background:#2E6F40;
 color:#fff;
 padding:5px 10px 7px 10px;
 display:inline-block; 
@@ -233,11 +233,11 @@ width:40px;
 height:40px;
 line-height:40px;
 color:#fff; 
-background:#000;
+background:#253D2C;
 text-align:center;
  }
 .list_2imi2 span a:hover{
-background:#788954;
+background:#2E6F40;
  }
 .list_2im{
 position:relative; 
@@ -284,7 +284,7 @@ margin-bottom:30px;
  position:absolute;
  bottom:0;
  width:100%;
- background:#000000ab;
+ background:#253D2C000ab;
  padding:30px;
  display:none;
  }
@@ -295,27 +295,27 @@ display:block;
 margin-top:30px;
  }
 .list_4i2 ul li a {
-background-color: #788954;
+background-color: #2E6F40;
 }
 #list_o{
 padding-top:40px;
 padding-bottom:40px; 
  }
 #list_o .list_2im1{
-background:#f3fbe2;
+background:#CFFFDC;
 padding:15px; 
  }
 /*********************list_end****************/
 
 /*********************blog****************/
 #blog{
-background:#f3fbe2;
+background:#CFFFDC;
 padding-top:40px;
 padding-bottom:40px; 
  }
 .blog_h_1i h6 a{
 margin-right:10px;
-color:#999!important;
+color:#b1dbbc!important;
 }
 .blog_h_1i h6 a i{
 margin-right:5px;
@@ -331,7 +331,7 @@ padding-top:40px;
 padding-bottom:50px;
  }
 .testim_1i1 span{
-background:#788954;
+background:#2E6F40;
 width:40px;
 height:40px;
 text-align:center;

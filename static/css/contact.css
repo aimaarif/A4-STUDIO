@@ -23,13 +23,13 @@ background:#fff;
 height:180px;
 }
 .contact_1lm{
-box-shadow: 0 0 10px #788954;
+box-shadow: 0 0 10px #2E6F40;
 padding:40px 20px;
-background:#f3fbe2;
+background:#CFFFDC;
  }
 .contact_1r1 span{
 display:inline-block;
-background:#788954;
+background:#2E6F40;
 color:#fff;
 width:45px;
 height:45px;
@@ -40,7 +40,7 @@ font-size:18px;
     margin-right: 10px;
  }
 .contact_1rm{
-box-shadow: 0 0 10px #788954;
+box-shadow: 0 0 10px #2E6F40;
 padding:40px 20px; 
 background:#fff;
  }

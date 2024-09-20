@@ -2,18 +2,6 @@
 
 {%block content%}
 
-<section id="center" class="center_list clearfix">
-  <div class="container">
-   <div class="row">
-    <div class="center_list_1 text-center clearfix">
-	 <div class="col-sm-12">
-	   <h5 class="mgt"><a href="login.html">Home</a> / Login </h5>
-	 </div>
-	</div>
-   </div>
-  </div>
-</section>
-
 <section id="register">
  <div class="container">
   <div class="row">
@@ -22,7 +10,7 @@
 	 <div class="register_1l clearfix">
 	  <div class="register_1li clearfix">
 	   <h3 class="mgt">Welcome to A4 STUDIO</h3>
-	   <p>Nulla quis sem at nibh imperdiet Duis sagittis ipsum Praesent mauris.</p>
+	   <p>Let's come together to discover, share, and celebrate the beauty of visual expressions.</p>
 	   <h4 class="c_text">Login To Your Account</h4>
 	  </div>
          <form method="POST" action="{% url 'login' %}">
@@ -45,22 +33,20 @@
 		 <h6>Forgot Password ? <a class="c_text" href="{%url 'reset_password'%}">Click Here</a></h6>
 		</div>
 		 </form>
+		 <h4 style="text-align: center;">OR</h4>
+           <p>Don't have an account, Click the button given below.</p>
+           <div class="col-sm-12 space_all">
+		  <h5><a class="button" href="{%url 'register'%}">CREATE ACCOUNT</a></h5>
+          </div>
 	   </div>
 	   </div>
 	  </div>
    </div>
-	<div class="col-sm-6">
+	<div class="col-sm-6" style="padding: 0 60px 0 60px">
 	 <div class="register_1r clearfix">
-	  <img src="../../static/img/39.jpg" class="iw" alt="abc">	 </div>
+	  <img src="../../static/img/login.jpg" class="iw" alt="abc" height="625px">	 </div>
 	</div>
    </div>
-	<div class="col-sm-6 space-left">
-	<h4 style="text-align:center">OR</h4>
-           <p>Don't have an account, Click the button given below.</p>
-           <div class="col-sm-12 space_all">
-		  <h5><a class="button" href="{%url 'register'%}">CREATE ACCOUNT</a></h5>
-  </div>
-	</div>
  </div>
 </section>
 

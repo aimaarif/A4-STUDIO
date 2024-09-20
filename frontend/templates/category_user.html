@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+{% block content %}
+
+<style>
+    .categories-container {
+        max-width: 1000px;
+        margin: 20px auto;
+        padding: 20px;
+        background-color: #CFFFDC; /* Light gray background */
+        border-radius: 10px; /* Rounded corners */
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+    }
+
+    .categories-title {
+        font-size: 1.75em; /* Slightly larger title font */
+        font-weight: bold;
+        margin-bottom: 20px;
+    }
+
+    .category-list {
+        list-style-type: none; /* Remove default bullet points */
+        padding: 0;
+    }
+
+    .category-list li {
+        display: flex;
+        justify-content: space-between; /* Space between category name and link */
+        align-items: center;
+        padding: 10px 0;
+        border-bottom: 1px solid #e9ecef; /* Bottom border for separation */
+    }
+
+    .category-list li a {
+        text-decoration: none; /* No underline */
+    }
+
+
+</style>
+
+<div class="categories-container">
+    <h2 class="categories-title">Categories in {{ maincategory.name }}</h2>
+    <ul class="category-list">
+        {% for category in categories %}
+            <li>
+                <span>{{ category.name }}</span>
+                <a class="" href="{% url 'add_product_view' category.id %}">Add Product</a>
+            </li>
+        {% endfor %}
+    </ul>
+</div>
+
+{% endblock %}

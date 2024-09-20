@@ -2,18 +2,6 @@
 
 {%block content%}
 
-<section id="center" class="center_list clearfix"> 
-  <div class="container">
-   <div class="row">
-    <div class="center_list_1 text-center clearfix">
-	 <div class="col-sm-12">
-	   <h5 class="mgt"><a href="login.html">Home</a> / Register </h5>
-	 </div>
-	</div>
-   </div>
-  </div>
-</section>
-
 <section id="register">
  <div class="container">
   <div class="row">
@@ -22,15 +10,28 @@
 	 <div class="register_1l clearfix">
 	  <div class="register_1li clearfix">
 	   <h3 class="mgt">Welcome to A4 STUDIO</h3>
-	   <p>Nulla quis sem at nibh imperdiet Duis sagittis ipsum Praesent mauris.</p>
+	   <p>Let's come together to discover, share, and celebrate the beauty of visual expressions.</p>
 	   <h4 class="c_text">Create a New Account</h4>
 	  </div>
-	  <div class="register_1li1 clearfix">
+	  <div class="register_1li1l clearfix">
 	  <form method="POST" action="{% url 'register' %}">
-    {% csrf_token %}
+		{% csrf_token %}
+        <div class="register_1li1l clearfix">
+			<h5>{{ form.first_name.label_tag }}</h5>
+			{{ form.first_name }}
 
-    {{ form.as_p }}
+			<h5>{{ form.last_name.label_tag }}</h5>
+			{{ form.last_name}}
 
+			<h5>{{ form.username.label_tag }}</h5>
+			{{ form.username }}
+			
+			<h5>{{ form.email.label_tag }}</h5>
+			{{ form.email }}
+			
+			<h5>{{ form.password.label_tag }}</h5>
+			{{ form.password }}
+		</div>
 	  <div class="register_1li2 clearfix">
 	   <p>
 	   I am a
@@ -52,9 +53,9 @@
 	  </div>
 	 </div>
 	</div>
-	<div class="col-sm-6">
+	<div class="col-sm-6" style="padding: 0 50px 0 50px">
 	 <div class="register_1r clearfix">
-	  <img src="../../static/img/39.jpg" class="iw" alt="abc">	 </div>
+	  <img src="../../static/img/register.jpg" class="iw" alt="abc" height="800px"></div>
 	</div>
    </div>
   </div>

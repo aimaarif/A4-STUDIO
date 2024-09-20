@@ -13,16 +13,16 @@ padding-bottom:40px;
  
 .example_h_1l span i{
   font-size:40px;
-  color:#000;
+  color:#253D2C;
   }
 .example_h_1l{
- box-shadow: 0 0 10px #788954;
+ box-shadow: 0 0 10px #2E6F40;
  padding:20px 10px 25px 10px;
  background:#fff; 
   }
 .example_h_1l hr{
 border-width:3px;
-border-color:#788954;
+border-color:#2E6F40;
 width:15%;
  }
 .example_h_1{
@@ -34,23 +34,24 @@ padding: 5px 10px 20px 10px;
 background:#fff;
 }
 .team_homeii ul li a {
-background-color: #788954;
+background-color: #2E6F40;
 }
 #team_pg{
 padding-top:40px;
 padding-bottom:40px;
-background:#f3fbe2; 
+background:#CFFFDC; 
  }
 #connect{
 padding-top:40px;
 padding-bottom:40px;
+background-color: #CFFFDC;
   }
 .connect_1m{
   display:flex;
   }
 .connect_1l span{
  font-size:40px;
- color: #788954;
+ color: #2E6F40;
  margin-right:15px;
   }
 .connect_1r h4{

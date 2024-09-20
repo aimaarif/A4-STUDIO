@@ -2,7 +2,17 @@ from django import forms
 from django.contrib.auth.models import User
 from .models import ContactMessage, Subscriber
 from django.contrib.auth.models import User
-from .models import UserProfile, Product, Category
+from .models import UserProfile, Product,  ProductReview
+
+
+class ProductReviewForm(forms.ModelForm):
+    class Meta:
+        model = ProductReview
+        fields = ['rating']
+        widgets = {
+            'rating': forms.RadioSelect(choices=[(i, str(i)) for i in range(1, 6)])
+        }
+
 
 class ProfileImageForm(forms.ModelForm):
     first_name = forms.CharField(max_length=30, required=False, label='First Name')
@@ -74,15 +84,25 @@ class RegisterForm(forms.ModelForm):
         super(RegisterForm, self).__init__(*args, **kwargs)
 
         self.fields['username'].help_text = '<br><span class="form-text text-muted"><small>Allowed Letters, digits, @/./+/-/_ and max char 150 .</small></span>'
-        self.fields['username'].widget.attrs['label'] = '<h5>Username</h5>'
+        self.fields['username'].label = 'Username *'
+        self.fields['username'].widget.attrs['class'] = 'form-control'
+        self.fields['username'].widget.attrs['placeholder'] = 'Enter Your Username'
 
-        self.fields['first_name'].widget.attrs['label'] = '<h5>First Name</h5>'
+        self.fields['first_name'].label = 'First Name'
+        self.fields['first_name'].widget.attrs['class'] = 'form-control'
+        self.fields['first_name'].widget.attrs['placeholder'] = 'Enter Your First Name'
 
-        self.fields['last_name'].widget.attrs['label'] = '<h5>Last Name</h5>'
+        self.fields['last_name'].label = 'Last Name'
+        self.fields['last_name'].widget.attrs['class'] = 'form-control'
+        self.fields['last_name'].widget.attrs['placeholder'] = 'Enter Your Last Name'
 
-        self.fields['email'].widget.attrs['label'] = '<h5>Email Adress</h5>'
+        self.fields['email'].label = 'Email Adress *'
+        self.fields['email'].widget.attrs['class'] = 'form-control'
+        self.fields['email'].widget.attrs['placeholder'] = 'Enter Your Email'
 
-        self.fields['password'].widget.attrs['label'] = '<h5>Password</h5>'
+        self.fields['password'].label = 'Password *'
+        self.fields['password'].widget.attrs['class'] = 'form-control'
+        self.fields['password'].widget.attrs['placeholder'] = 'Enter Your Password'
 
 
 

@@ -3,39 +3,64 @@
 {% block content %}
 
 <style>
-  .fa-star {
-      font-size: 1.5rem;
-      color: #ddd;
-      cursor: pointer;
-  }
+.star-rating {
+  display: inline-block;
+  font-size: 1.5rem;
+  color: gold;
+}
 
-  .fa-star.checked {
-      color: gold;
-  }
+.star-rating .filled {
+  color: gold;
+}
+
+.star-rating .empty {
+  color: gray;
+}
+
+.star-rating {
+  display: flex;
+  justify-content: left;
+  direction: rtl; 
+}
+
+.star-rating input[type="radio"] {
+  display: none; 
+}
+
+.star-rating label {
+  font-size: 2em;
+  color: #ddd; 
+  cursor: pointer;
+  transition: color 0.2s;
+}
+
+.star-rating input[type="radio"]:checked ~ label {
+  color: #ddd;
+}
+
+.star-rating label:hover,
+.star-rating label:hover ~ label {
+  color: gold;
+}
+
+.star-rating input[type="radio"]:checked + label,
+.star-rating input[type="radio"]:checked + label ~ label {
+  color: gold;
+}
+
 </style>
 
 
-<section id="center" class="center_list clearfix"> 
-  <div class="container">
-    <div class="row">
-      <div class="center_list_1 text-center clearfix">
-        <div class="col-sm-12">
-          <h5 class="mgt"><a href="#">Home</a> / List Detail</h5>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
 
 {% include 'base_product.html' %}
 
 <div class="col-sm-9">
   <div class="detail_1l clearfix">
     <div class="col-sm-5 space_left">
-      <img title="" src="{{ product.image.url }}" alt="abc" class="iw" style="height:500px; width: 800px;">
+      <img title="" src="{{ product.image.url }}" alt="abc" class="iw" style="height:800px; width: 800px;">
     </div>
   </div>
-</div>
+
 
 <div class="col-sm-7 space_left">
   <div class="detail_1lr clearfix">
@@ -52,44 +77,53 @@
         </span>
         <span class="span_2 col_2">0 Review(s)</span>
       </h6> {% endcomment %}
-      <div class="review-section">
-        <h3>Reviews</h3>
-        <div class="review-list">
-            {% for review in reviews %}
-                <div class="review">
-                    <strong>{{ review.user.username }}</strong>
-                    <div class="stars">
-                        {% for i in 5|times %}
-                            <span class="fa fa-star {% if review.rating >= i %}checked{% endif %}"></span>
-                        {% endfor %}
-                    </div>
-                    <p>{{ review.comment }}</p>
-                </div>
-            {% endfor %}
+
+      <div class="detail_1lri3 clearfix">
+        <div class="detail_1lri3l clearfix">
+            <div class="detail_1lri3r clearfix">
+              <h5 class="mgt text-right"><a href="{% url 'download_image' product.id %}" class="button mgt">Download Image</a></h5>
+            </div>
         </div>
     
-        <h4>Leave a Review:</h4>
-        <form method="post" id="reviewForm">
-            {% csrf_token %}
-            <div class="star-rating">
-                <span class="fa fa-star" data-value="1"></span>
-                <span class="fa fa-star" data-value="2"></span>
-                <span class="fa fa-star" data-value="3"></span>
-                <span class="fa fa-star" data-value="4"></span>
-                <span class="fa fa-star" data-value="5"></span>
-            </div>
-            <input type="hidden" name="rating" id="ratingInput" value="1">
-            <textarea name="comment" placeholder="Write your review here..."></textarea>
-            <button type="submit">Submit Review</button>
-        </form>
-    </div>
+      <div>
+        <h3>Average Rating: {{ average_rating|floatformat:1 }} / 5</h3>
+        <!-- Display stars based on the average rating -->
+        <div class="star-rating">
+          {% for star in "12345" %}
+            {% if star <= average_rating|stringformat:"d" %}
+              ★
+            {% else %}
+              ☆
+            {% endif %}
+          {% endfor %}
+        </div>
+      </div>
     
+      <h3>Leave a Review</h3>
+      <form method="post">
+        {% csrf_token %}
+        <div class="star-rating">
+          <input type="radio" id="star5" name="rating" value="5" />
+          <label for="star5" title="5 stars">★</label>
+          <input type="radio" id="star4" name="rating" value="4" />
+          <label for="star4" title="4 stars">★</label>
+          <input type="radio" id="star3" name="rating" value="3" />
+          <label for="star3" title="3 stars">★</label>
+          <input type="radio" id="star2" name="rating" value="2" />
+          <label for="star2" title="2 stars">★</label>
+          <input type="radio" id="star1" name="rating" value="1" />
+          <label for="star1" title="1 star">★</label>
+       </div>
+        <button style="border:none;" class="button mgt" type="submit">Submit</button>
+      </form>
     
+      <h3>Reviews</h3>
       <ul>
-        <li>Lightning-fast turnaround times, including one-day production</li>
-        <li>Multiple premium paper stocks and folding options</li>
-        <li>Brochure direct mailing services available</li>
+        {% for review in reviews %}
+          <li>{{ review.user.username }}: {{ review.rating }} stars</li>
+        {% endfor %}
       </ul>
+    
       <hr>
 
       <!-- New Section: Display User Who Added the Product -->
@@ -102,41 +136,50 @@
         {% endif %}
       </div>
 
-      <div class="detail_1lri3 clearfix">
-        <div class="detail_1lri3l clearfix">
-          <div class="col-sm-6 space_right">
-            <div class="detail_1lri3r clearfix">
-              <h5 class="mgt text-right"><a href="{% url 'download_image' product.id %}" class="button mgt">Download Image</a></h5>
-            </div>
-          </div>
-        </div>
 
         <div class="detail_1lri4 clearfix">
-          <hr>
           <ul>
-            <li><a href="#"><i class="fa fa-repeat"></i> Add to Compare</a></li>
-            <li><a href="#"><i class="fa fa-heart-o"></i> Add to Wishlist</a></li>
-            <li><a href="#"><i class="fa fa-share-alt"></i> Share</a></li>
+            {% if user.is_authenticated %}
+            <form action="{% url 'add_to_wishlist' product.id %}" method="POST">
+                {% csrf_token %}
+                <li><button style="border:none; background:none;" type="submit"><i class="fa fa-heart"></i> Add to Wishlist</button></li>
+            </form>
+            {% else %}
+                <a href="{% url 'login' %}">Log in to add to wishlist</a>
+            {% endif %}
+            <!-- Share Button -->
+            <li><button style="border:none; background:none;"  id="share-button"><i class="fa fa-share"></i >Share</button></li>
+            </div>
+
           </ul>
         </div>
       </div>
     </div>
   </div>
 </div>
-
+</div>
+</div>
+</div>
 <br>
 
-<div class="list_1 text-center clearfix">
-  <div class="col-sm-12">  
-    <h2 class="mgt">You Might Also Like</h2>
-  </div>
-</div>
+<script>
+  document.getElementById('share-button').addEventListener('click', function() {
+      if (navigator.share) {
+          navigator.share({
+              title: '{{ product.name }}',
+              text: 'Check out this product on our website!',
+              url: '{{ request.build_absolute_uri }}'
+          }).then(() => {
+              console.log('Product shared successfully');
+          }).catch((error) => {
+              console.error('Error sharing product:', error);
+          });
+      } else {
+          alert('Sharing is not supported on this browser.');
+      }
+  });
+  </script>
 
-<div class="list_pg_1r1 clearfix">
-  <!-- Repeat the "You Might Also Like" Section as is -->
-</div>
-
-{% endblock %}
 <script>
   document.addEventListener('DOMContentLoaded', function() {
       const stars = document.querySelectorAll('.star-rating .fa-star');
@@ -158,3 +201,5 @@
       });
   });
 </script>
+
+{% endblock %}

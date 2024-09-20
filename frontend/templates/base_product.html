@@ -1,80 +1,81 @@
 {%load static%}
 
+<style>
+    .collapseIcon {
+        cursor: pointer;
+        display: inline-block;
+        margin-left: 10px;
+    }
+    
+    .clickable {
+        display: none; /* Initially hide the categories */
+    }
+    
+    .collapseIcon.active {
+        transform: rotate(180deg);
+        transition: transform 0.3s ease;
+    }
+    
+</style>
 <section id="list_pg" class="clearfix"> 
     <div class="container">
      <div class="row">
       <div class="list_pg_1 clearfix">
        <div class="col-sm-3">
          <div class="list_pg_1l clearfix">
-            <div class="center_shop_1li clearfix">
-         <h5 class="mgt">HOME</h5>
-          <div class="ziehharmonika">
-              <h3 data-prefix="★" class="active"><a href="{% url 'detail' %}">Gallery</a><div class="arrowDown"></div><div class="collapseIcon">–</div><div class="arrowDown"></div><div class="collapseIcon">–</div><div class="arrowDown"></div><div class="collapseIcon">–</div><div class="arrowDown"></div><div class="collapseIcon">–</div></h3>
-              <div class="clickable" style="display: block;">
-                <ul>
-                 <li><a href="{% url 'detail' %}">Furniture</a></li>
-                 <li><a href="{% url 'detail' %}">Lighting</a></li>
-                 <li><a href="{% url 'detail' %}">Accessories</a></li>
-                 <li><a href="{% url 'detail' %}">Othres</a></li>
-                </ul>
-             </div>
-             <h3 data-prefix="★"><a href="{% url 'detail' %}">Interiors</a><div class="arrowDown"></div><div class="collapseIcon">+</div><div class="arrowDown"></div><div class="collapseIcon">+</div><div class="arrowDown"></div><div class="collapseIcon">+</div><div class="arrowDown"></div><div class="collapseIcon">+</div></h3>
-              <div class="clickable">
-                <ul>
-                 <li><a href="{% url 'detail' %}">Furniture</a></li>
-                 <li><a href="{% url 'detail' %}">Lighting</a></li>
-                 <li><a href="{% url 'detail' %}">Accessories</a></li>
-                 <li><a href="{% url 'detail' %}">Othres</a></li>
-                </ul>
-             </div>
-             <h3 data-prefix="★" class=""><a href="{% url 'detail' %}">Architectural</a><div class="arrowDown"></div><div class="collapseIcon">+</div><div class="arrowDown"></div><div class="collapseIcon">+</div><div class="arrowDown"></div><div class="collapseIcon">+</div><div class="arrowDown"></div><div class="collapseIcon">+</div></h3>
-              <div class="clickable" style="display: none;">
-                <ul>
-                 <li><a href="{% url 'detail' %}">Furniture</a></li>
-                 <li><a href="{% url 'detail' %}">Lighting</a></li>
-                 <li><a href="{% url 'detail' %}">Accessories</a></li>
-                 <li><a href="{% url 'detail' %}">Othres</a></li>
-                </ul>
-             </div>
-             <h3 data-prefix="★"><a href="{% url 'detail' %}">Antiques</a><div class="arrowDown"></div><div class="collapseIcon">+</div><div class="arrowDown"></div><div class="collapseIcon">+</div><div class="arrowDown"></div><div class="collapseIcon">+</div><div class="arrowDown"></div><div class="collapseIcon">+</div></h3>
-              <div class="clickable">
-                <ul>
-                 <li><a href="{% url 'detail' %}">Furniture</a></li>
-                 <li><a href="{% url 'detail' %}">Lighting</a></li>
-                 <li><a href="{% url 'detail' %}">Accessories</a></li>
-                 <li><a href="{% url 'detail' %}">Othres</a></li>
-                </ul>
-             </div>
-              <h3 data-prefix="★" class=""><a href="{% url 'detail' %}">Folk Art</a><div class="arrowDown"></div><div class="collapseIcon">+</div><div class="arrowDown"></div><div class="collapseIcon">+</div><div class="arrowDown"></div><div class="collapseIcon">+</div><div class="arrowDown"></div><div class="collapseIcon">+</div></h3>
-              <div class="clickable" style="display: none;">
-                <ul>
-                 <li><a href="{% url 'detail' %}">Furniture</a></li>
-                 <li><a href="{% url 'detail' %}">Lighting</a></li>
-                 <li><a href="{% url 'detail' %}">Accessories</a></li>
-                 <li><a href="{% url 'detail' %}">Othres</a></li>
-                </ul>
-             </div>
-             <h3 data-prefix="★" class=""><a href="{% url 'detail' %}">Salvage</a><div class="arrowDown"></div><div class="collapseIcon">+</div><div class="arrowDown"></div><div class="collapseIcon">+</div><div class="arrowDown"></div><div class="collapseIcon">+</div><div class="arrowDown"></div><div class="collapseIcon">+</div></h3>
-              <div class="clickable" style="display: none;">
-                <ul>
-                 <li><a href="{% url 'detail' %}">Furniture</a></li>
-                 <li><a href="{% url 'detail' %}">Lighting</a></li>
-                 <li><a href="{% url 'detail' %}">Accessories</a></li>
-                 <li><a href="{% url 'detail' %}">Othres</a></li>
-                </ul>
-             </div>
+            <div class="center_shop_1li clearfix product_1i">
+              <h5 class="mgt">SEARCH</h5>
+              <div class="input-group">
+                <input type="text" class="form-control form_2" placeholder="Search Here...">
+                <span class="input-group-btn">
+                    <button class="btn btn-primary" type="button">
+                        <i class="fa fa-search"></i></button>
+                </span>
+              </div>
             </div>
-        </div>
             
-            <div class="product_1i clearfix">
-         <h5 class="mgt">SEARCH</h5>
-        <div class="input-group">
-                      <input type="text" class="form-control form_2" placeholder="Search Here...">
-                      <span class="input-group-btn">
-                          <button class="btn btn-primary" type="button">
-                              <i class="fa fa-search"></i></button>
-                      </span>
-        </div>
-        </div>
+        <div class="product_1i clearfix">
+          <h5 class="mgt">HOME</h5>
+          <div class="ziehharmonika">
+            {% for maincategory in maincategories %}
+            <h3 data-prefix="★" class="active">
+                <a href="{% url 'maincategory_detail' maincategory.id %}">{{ maincategory.name }}</a>
+                <div class="collapseIcon">+</div>
+            </h3>
+            <div class="clickable" style="display: none;">
+                <ul>
+                    {% for category in maincategory.category_set.all %}
+                        <li>
+                            <a href="{% url 'category_detail' category.id %}">{{ category.name }}</a>
+                        </li>
+                    {% endfor %}
+                </ul>
+            </div>
+        {% endfor %}        
+          </div>
+      </div>
+                      
+                      
+
       </div>
  </div>
+ <br>
+
+ <script>
+    $(document).ready(function() {
+        $('h3 .collapseIcon').on('click', function() {
+            var $this = $(this);
+            var $clickable = $this.closest('h3').next('.clickable');
+            
+            $clickable.slideToggle(); // Toggle the visibility of categories
+            
+            // Toggle the icon between '+' and '-'
+            if ($this.text() === "+") {
+                $this.text("-");
+            } else {
+                $this.text("+");
+            }
+        });
+    });
+    
+ </script>
