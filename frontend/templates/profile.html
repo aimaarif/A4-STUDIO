@@ -64,24 +64,25 @@
                     <ul class="following-list">
                         {% if show_following %}
                         {% for followed_user in following_list %}
-                            <div class="col-sm-6" style="margin:0; padding:0">
+                            <div class="col-sm-6" style="margin:0; padding: 0; ">
                             <li><h5><a href="{% url 'profile' followed_user.user.id %}">{{ followed_user.user.username }}</a></h5></li>
                             </div>
                             <!-- Display follow/unfollow button based on whether the user is already following the profile owner -->
                             <div class="col-sm-6 text-right" style="margin:0; padding:0">
+                                <div style="padding-bottom:10px;">
                             {% if request.user != followed_user.user %}
                                 {% if followed_user in request.user.userprofile.following.all %}
                                     <a href="{% url 'unfollow_user' followed_user.user.id %}" class="button mgt">Unfavorite</a>
                                 {% else %}
                                     <a  href="{% url 'follow_user' followed_user.user.id %}" class="button mgt">Add to Favorites</a>
                                 {% endif %}
+                            </div>
                             {% endif %}
                            </div>
                         {% empty %}
                             <li>You've not added anyone yet.</li>
                         {% endfor %}
                     {% endif %}    
-                    <br>
                     </ul>
 
                 <li class="wishlist-item">

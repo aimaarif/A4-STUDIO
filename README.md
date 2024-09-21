@@ -1,5 +1,6 @@
 # A4-STUDIO
 .venv/Scripts/activate
+pip install python-dotenv
 
 python manage.py runserver
 

@@ -383,3 +383,17 @@ def blog(request):
 
 def blog_detail(request):
 	return render(request, 'blog_detail.html', {})
+
+def search(request):
+    query = request.GET.get('q')
+    products = []
+    
+    if query:
+        products = Product.objects.filter(name__icontains=query)  # Search by product name (or adapt for other fields)
+    
+    context = {
+        'query': query,
+        'products': products
+    }
+    
+    return render(request, 'search.html', context)

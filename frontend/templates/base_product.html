@@ -24,15 +24,18 @@
        <div class="col-sm-3">
          <div class="list_pg_1l clearfix">
             <div class="center_shop_1li clearfix product_1i">
-              <h5 class="mgt">SEARCH</h5>
-              <div class="input-group">
-                <input type="text" class="form-control form_2" placeholder="Search Here...">
-                <span class="input-group-btn">
-                    <button class="btn btn-primary" type="button">
-                        <i class="fa fa-search"></i></button>
-                </span>
-              </div>
-            </div>
+                <h5 class="mgt">SEARCH</h5>
+                <form action="{% url 'search' %}" method="get">
+                    <div class="input-group">
+                        <input type="text" name="q" class="form-control form_2" placeholder="Search Here...">
+                        <span class="input-group-btn">
+                            <button class="btn btn-primary" type="submit">
+                                <i class="fa fa-search"></i>
+                            </button>
+                        </span>
+                    </div>
+                </form>
+            </div>            
             
         <div class="product_1i clearfix">
           <h5 class="mgt">HOME</h5>
