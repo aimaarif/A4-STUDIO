@@ -86,10 +86,11 @@
             <li class="act" style="color:white;">{{ page_obj.number }}</li>
 
             {% if page_obj.has_next %}
-                <li><a href="?page={{ page_obj.paginator.num_pages }}"><i class="fa fa-chevron-right" style="color: black;"></i></a></li>
-            {%else%}
+                <li><a href="?page={{ page_obj.next_page_number }}"><i class="fa fa-chevron-right" style="color: black;"></i></a></li>
+            {% else %}
                 <li style="color:#f3fbe2;"><i class="fa fa-chevron-right"></i></li>
             {% endif %}
+
 		   </ul>
 	   </div>
 	  </div>

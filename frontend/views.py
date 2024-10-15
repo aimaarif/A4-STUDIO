@@ -256,14 +256,20 @@ def add_product(request, category_id):
             product.user = request.user
             product.save()
             messages.success(request, 'Product added successfully!')
-            return redirect('profile')  # Redirect to profile or wherever you want
+            return redirect('profile', username=request.user.username)  
     else:
         form = ProductForm()
     return render(request, 'add_product.html', {'form': form, 'category': category})
 
+@login_required
+def delete_product(request, product_id):
+    product = get_object_or_404(Product, id=product_id, user=request.user)
+    product.delete()
+    messages.success(request, 'Product deleted successfully!')
+    return redirect('profile', username=request.user.username)
+
 def edit_profile(request):
 	return render(request, 'edit_profile.html', {})
-
 
 @login_required
 def userprofile(request, user_id):
@@ -306,11 +312,11 @@ def follow_user(request, user_id):
 
     if user_to_follow != user_profile:
         user_profile.follow(user_to_follow)
-        messages.success(request, f"You are now following {user_to_follow.user.username}.")
+        messages.success(request, f"You've added {user_to_follow.user.username}.")
     else:
-        messages.error(request, "You cannot follow yourself.")
+        messages.error(request, "You cannot add yourself.")
 
-    return redirect('profile', user_id=user_to_follow.user.id)
+    return redirect('userprofile', user_id=user_to_follow.user.id)
 
 @login_required
 def unfollow_user(request, user_id):
@@ -320,11 +326,11 @@ def unfollow_user(request, user_id):
 
     if user_to_unfollow != user_profile:
         user_profile.unfollow(user_to_unfollow)
-        messages.success(request, f"You have unfollowed {user_to_unfollow.user.username}.")
+        messages.success(request, f"You have unadded {user_to_unfollow.user.username}.")
     else:
-        messages.error(request, "You cannot unfollow yourself.")
+        messages.error(request, "You cannot add yourself.")
 
-    return redirect('profile', user_id=user_to_unfollow.user.id)
+    return redirect('userprofile', user_id=user_to_unfollow.user.id)
 
 @login_required
 def add_to_wishlist(request, product_id):

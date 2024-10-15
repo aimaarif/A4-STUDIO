@@ -100,7 +100,9 @@
                                     </div>
                                     <div class="list_2im1 clearfix">
                                         <h4><a href="{% url 'detail' item.product.id %}">{{ item.product.name }}</a></h4>
+                                        <div class="col-sm-6">
                                         <h6><a class="button mgt" href="{% url 'detail' item.product.id %}">View</a></h6>
+                                        </div>
                                     </div>
                                 </div>
                                 {% empty %}
@@ -145,7 +147,15 @@
                         </div>
                         <div class="list_2im1 clearfix">
                             <h4><a href="{% url 'detail' product.id %}">{{ product.name }}</a></h4>
-                            <h6><a class="button mgt" href="{% url 'detail' product.id %}">View</a></h6>
+                            <div class="col-sm-6">
+                                <h6><a class="button mgt" href="{% url 'detail' product.id %}">View</a></h6>
+                            </div>
+                            <div class="col-sm-6">
+                                <form action="{% url 'delete_product' product.id %}" method="POST" style="display:inline;">
+                                    {% csrf_token %}
+                                    <h6><button style="border:none;" type="submit" class="button mgt">Delete</button></h6>
+                                </form>
+                            </div>
                         </div>
                     </div>
                     {% empty %}
