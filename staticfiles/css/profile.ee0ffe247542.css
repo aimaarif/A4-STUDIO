@@ -1,0 +1,172 @@
+.profile-container {
+    max-width: 1000px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #CFFFDC; /* Light gray background */
+    border-radius: 10px; /* Rounded corners */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+}
+
+.profile-info {
+    display: flex;
+    align-items: center;
+    padding-bottom: 20px; /* Space below profile section */
+    border-bottom: 1px solid #e9ecef; /* Bottom border */
+}
+
+.profile-info img {
+    margin-right: 16px; /* More space between image and username */
+    border-radius: 50%; /* Circular image */
+}
+
+.profile-details {
+    flex: 1;
+}
+
+.profile-details h4 {
+    margin: 0;
+    font-size: 1.5em; /* Larger font size */
+}
+
+.profile-edit-form {
+    margin-top: 20px;
+}
+
+.profile-edit-form label {
+    font-weight: bold;
+    margin-top: 10px;
+}
+
+.category-list,
+.product-list {
+    list-style-type: none; 
+    padding: 0;
+}
+
+.category-list li,
+.product-list li {
+    padding: 10px 0;
+    border-bottom: 1px solid #e9ecef;
+}
+
+.product-list img {
+    margin-left: 10px;
+    border-radius: 5px;
+}
+
+.collapseIcon {
+    cursor: pointer;
+    display: inline-block;
+    margin-left: 10px;
+}
+
+.clickable {
+    display: none; 
+}
+
+.collapseIcon.active {
+    transform: rotate(180deg);
+    transition: transform 0.3s ease;
+}
+
+
+
+/* Form Container */
+.profile-edit-form {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #fff; /* White background like Instagram */
+    border: 1px solid #dbdbdb; /* Light gray border */
+    border-radius: 10px; /* Rounded corners */
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+    font-family: 'Arial', sans-serif;
+}
+
+/* Form Label Styling */
+.profile-edit-form label {
+    display: block;
+    margin-bottom: 5px;
+    font-size: 14px;
+    color: #b1dbbc /* Instagram's light text color */
+    text-transform: uppercase;
+}
+
+/* Input Fields Styling */
+.profile-edit-form input[type="text"],
+.profile-edit-form textarea,
+.profile-edit-form input[type="file"] {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 1px solid #dbdbdb; /* Light gray border */
+    border-radius: 5px;
+    background-color: #fafafa; /* Light background like Instagram */
+    font-size: 16px;
+    color: #262626;
+}
+
+/* Button Styling */
+.profile-edit-form .button {
+    border: none;
+}
+
+
+/* Bio Textarea Styling */
+.profile-edit-form textarea {
+    height: 100px; /* Adjust height for bio */
+    resize: none; /* Disable resizing */
+}
+
+/* Profile Image Upload Styling */
+.profile-edit-form input[type="file"] {
+    font-size: 14px;
+    background-color: #fff;
+    border: 1px solid #dbdbdb;
+    padding: 5px;
+}
+
+/* Media Queries for Responsive Design */
+@media screen and (max-width: 600px) {
+    .profile-edit-form {
+        padding: 15px;
+    }
+
+    .profile-edit-form input[type="text"],
+    .profile-edit-form textarea {
+        font-size: 14px;
+        padding: 8px;
+    }
+
+    .profile-edit-form .button {
+        font-size: 14px;
+    }
+}
+
+.profile-info {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.profile-details {
+    display: flex;
+    flex-direction: column;
+}
+
+.button.mgt {
+    margin-top: 10px;
+}
+
+/* Media query for screens 768px or smaller */
+@media (max-width: 768px) {
+    .profile-info {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    
+    .button.mgt {
+        margin-top: 10px;
+        align-self: flex-start; 
+    }
+}
